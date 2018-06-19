@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="./css/demo.css" />
+</head>
+<body>
+<div id="dd" class="wrapper-dropdown" tabindex="1" style="margin-top: 30px">
+    <span  class="select_content">请选择</span>
+    <ul class="dropdown" tabindex="1">
+        <li><a href="#">a</a></li>
+        <li><a href="#">b</a></li>
+        <li><a href="#">c</a></li>
+    </ul>
+</div>
+
+<div id="dd1" class="wrapper-dropdown" tabindex="1" style="margin-top: 30px">
+    <span  class="select_content">请选择</span>
+    <ul class="dropdown" tabindex="1">
+        <li><a href="#">a</a></li>
+        <li><a href="#">b</a></li>
+        <li><a href="#">c</a></li>
+    </ul>
+</div>
+
+<div id="dd2" class="wrapper-dropdown" tabindex="1" style="margin-top: 30px">
+    <span  class="select_content">请选择</span>
+    <ul class="dropdown" tabindex="1">
+        <li><a href="#">a</a></li>
+        <li><a href="#">b</a></li>
+        <li><a href="#">c</a></li>
+    </ul>
+</div>
+<!-- jQuery if needed -->
+<script type="text/javascript" src="javascript/jquery.js"></script>
+<script type="text/javascript">
+    function DropDown(el) {
+        this.dd = el;
+        this.placeholder = this.dd.children('span');
+        this.opts = this.dd.find('ul.dropdown > li');
+        this.val = '';
+        this.index = -1;
+        this.initEvents();
+    }
+    DropDown.prototype = {
+        initEvents : function() {
+            var obj = this;
+            obj.dd.on('click', function(event){
+                $(this).toggleClass('active');
+                return false;
+            });
+            obj.opts.on('click',function(){
+                var opt = $(this);
+                obj.val = opt.text();
+                obj.index = opt.index();
+                obj.placeholder.text(obj.val);
+//                alert(opt.index())
+            });
+        }
+    }
+
+    $(function() {
+//        初始化点击
+        var dd  = new DropDown($('#dd'));
+        var dd1 = new DropDown($('#dd1'));
+        var dd2 = new DropDown($('#dd2'));
+//      移除显示的内容
+        $('.wrapper-dropdown').click(function () {
+            $('.wrapper-dropdown').removeClass('active');
+        })
+        $(document).click(function() {
+            // all dropdowns
+            $('.wrapper-dropdown').removeClass('active');
+        });
+    });
+
+</script>
+
+
+</body>
+</html>
